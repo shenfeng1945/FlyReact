@@ -1,8 +1,8 @@
 {
   "name": "FlyReact",
   "version": "0.0.1",
-  "main": "index.js",
-  "typings": "dist/lib/index.d.ts",
+  "main": "dist/lib/index",
+  "types": "dist/lib/index",
   "repository": "git@github.com:shenfeng1945/FlyReact.git",
   "author": "shenfeng1945 <823902826@qq.com>",
   "license": "MIT",

@@ -14,6 +14,7 @@
       "noImplicitThis": true,
       "noImplicitAny": true,
       "importHelpers": true,
+      "outDir": "dist",
       "strictNullChecks": true,
       // "suppressImplicitAnyIndexErrors": true,
       // https://github.com/Microsoft/TypeScript/issues/28762#issuecomment-443406607
