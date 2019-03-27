@@ -48,13 +48,10 @@ workflows:
   build_accept_deploy:
     jobs:
       - prepare
-      - lint:
-          requires:
-            - prepare
-      - build:
-          requires:
-            - lint
       - test:
           requires:
-            - ci
+            - build
+      - build:
+          requires:
+            - prepare
       
