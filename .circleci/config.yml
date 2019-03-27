@@ -33,13 +33,14 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - build
+            - dist
     test:
      <<: *defaults
      steps: 
        - checkout
        - attach_workspace:
            at: .
+       - run: ls -la
        - run: yarn ci
        - store_test_results: 
            path: test-results
@@ -50,8 +51,8 @@ workflows:
       - prepare
       - test:
           requires:
-            - build
+            - prepare
       - build:
           requires:
-            - prepare
+            - test
       
