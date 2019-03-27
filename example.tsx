@@ -1,16 +1,17 @@
-import { Icon } from './lib'
+import IconExample from './lib/icon/icon.example'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { HashRouter as Router, Route, Link } from 'react-router-dom'
 
 ReactDOM.render(
     <Router>
-
-        <div>
+        <div className="page">
             <header>
-                <h1>FlyReact</h1>
+                <h1>
+                    FlyReact
+                </h1>
             </header>
-            <div>
+            <div className="content">
                 <aside>
                     <h2>组件</h2>
                     <ul>
@@ -20,8 +21,8 @@ ReactDOM.render(
                     </ul>
                 </aside>
                 <main>
-                  <Route path="/" component={Icon}></Route>
-                  <Route path="/icon" component={Icon}></Route>
+                    <Route path="/" exact render={() => <div>Hello FlyReact</div>}></Route>
+                    <Route path="/icon" component={IconExample}></Route>
                 </main>
             </div>
         </div>
