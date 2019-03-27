@@ -7,7 +7,7 @@
   "author": "shenfeng1945 <823902826@qq.com>",
   "license": "MIT",
   "files": [
-    "/dist"
+    "/dist/**/*"
   ],
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.dev.js",
