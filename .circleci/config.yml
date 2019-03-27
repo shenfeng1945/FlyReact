@@ -54,18 +54,7 @@ workflows:
       - build:
           requires:
             - lint
-      - tu:
+      - test:
           requires:
-            - build
-      - e2e:
-          requires:
-            - build
-      - deploy-github:
-          requires:
-            - tu
-            - e2e
-      - deploy-prod:
-          type: approval
-          requires:
-            - tu
-            - e2e
+            - ci
+      
