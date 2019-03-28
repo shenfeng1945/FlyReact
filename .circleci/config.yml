@@ -1,6 +1,5 @@
 # https://github.com/revolunet/create-react-app-circleci/blob/master/.circleci/config.yml
 defaults: &defaults
-  #working_directory: ./circleci
   docker:
     - image: circleci/node:8
 
@@ -10,15 +9,14 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-      - run: npm install
+            - v2-dependencies-{{ checksum "package.json" }}
+      - run: yarn install
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
+          key: v2-dependencies-{{ checksum "package.json" }}
       - persist_to_workspace:
           root: .
           paths:
@@ -29,30 +27,29 @@ jobs:
       - checkout
       - attach_workspace:
           at: .
-      - run: npm run build
+      - run: yarn build
       - persist_to_workspace:
           root: .
           paths:
             - dist
-    test:
-     <<: *defaults
-     steps: 
-       - checkout
-       - attach_workspace:
-           at: .
-       - run: ls -la
-       - run: yarn ci
-       - store_test_results: 
-           path: test-results
+  test:
+    <<: *defaults
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - run: yarn ci
+      - store_test_results:
+          path: test-results
+
 workflows:
   version: 2
   build_accept_deploy:
     jobs:
       - prepare
-      - test:
-          requires:
-            - prepare
       - build:
           requires:
             - test
-      
+      - test:
+          requires:
+            - prepare 
