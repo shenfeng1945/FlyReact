@@ -1,5 +1,5 @@
-import IconExample from './lib/icon/icon.example'
-import DialogExample from './lib/dialog/dialog.example'
+import IconExample from './lib/components/icon/icon.example'
+import DialogExample from './lib/components/dialog/dialog.example'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { HashRouter as Router, Route, Link } from 'react-router-dom'
@@ -7,7 +7,7 @@ import { HashRouter as Router, Route, Link } from 'react-router-dom'
 ReactDOM.render(
     <Router>
         <div className="page">
-            <header>
+            <header className="header">
                 <h1>
                     FlyReact
                 </h1>
@@ -24,7 +24,7 @@ ReactDOM.render(
                         </li>
                     </ul>
                 </aside>
-                <main>
+                <main className="main">
                     <Route path="/" exact render={() => <div>Hello FlyReact</div>}></Route>
                     <Route path="/icon" component={IconExample}></Route>
                     <Route path="/dialog" component={DialogExample}></Route>
