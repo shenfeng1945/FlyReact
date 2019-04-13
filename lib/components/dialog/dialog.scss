@@ -1,0 +1,63 @@
+.f-dialog-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(16,22,26,.7);
+    z-index: 20;
+}
+.f-dialog{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background: #ebf1f5;
+    min-width: 500px;
+    z-index: 21;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 20px;
+    &-header{
+        display: flex;
+        align-items: center;
+        background: #fff;
+        min-height: 40px;
+        padding-right: 5px;
+        padding-left: 20px;
+        border-radius: 6px 6px 0 0;
+        box-shadow: 0 1px 0 rgba(16,22,26,.15);
+        .f-dialog-heading{
+            font-size: 18px;
+            flex: 1;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            word-wrap: normal;
+            color: #182026;
+            font-weight: 600;
+        }
+        .close{
+            min-height: 30px;
+            min-width: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+    &-main{
+        .f-dialog-body{
+            margin: 20px;
+            line-height: 18px;
+        }
+    }
+    &-footer{
+        margin: 0 20px;
+        .f-dialog-footer-actions{
+            display: flex;
+            justify-content: flex-end;
+            .f-button{
+                margin-left: 10px;
+            }
+        }
+    }
+}

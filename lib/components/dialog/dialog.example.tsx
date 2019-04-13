@@ -6,8 +6,8 @@ export default function () {
     return (
         <div>
             <button onClick={() => setX(!x)}>click</button>
-            <Dialog visiable={x}>
-                hello world
+            <Dialog visiable={x} onClose={setX}>
+                实现快速且灵活的开发流程
             </Dialog>
         </div>
     )
