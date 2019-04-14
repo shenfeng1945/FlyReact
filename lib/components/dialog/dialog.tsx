@@ -2,6 +2,7 @@ import React, { Fragment, ReactElement } from 'react';
 import { Icon } from '../index';
 import './dialog.scss';
 import ReactDOM from 'react-dom';
+import Button from '../button/button';
 
 interface DialogProps {
     visiable: boolean;
@@ -52,16 +53,20 @@ const Dialog: React.FunctionComponent<DialogProps> = (props) => {
 }
 
 // 动态创建组件
-const alert = (text: string) => {
-    const div = document.createElement('div')
-    document.body.appendChild(div)
-    const component = <Dialog visiable={true} onClose={() => {
+const alert = (content: string) => {
+    const onClose = () => {
         ReactDOM.render(
             React.cloneElement(component, { visiable: false }), div
         )
         ReactDOM.unmountComponentAtNode(div)
         div.remove()
-    }}>{text}</Dialog>;
+    }
+    const div = document.createElement('div')
+    document.body.appendChild(div)
+    const component = <Dialog visiable={true} onClose={onClose}
+        buttons={[
+            <Button type="primary" onClick={onClose}>OK</Button>
+        ]}>{content}</Dialog>;
 
     ReactDOM.render(
         component,
@@ -69,9 +74,58 @@ const alert = (text: string) => {
     )
 }
 
+const confirm = (content: string, yes: () => void, no: () => void) => {
+    const onClose = () => {
+        ReactDOM.render(
+            React.cloneElement(component, { visiable: false }), div
+        )
+        ReactDOM.unmountComponentAtNode(div)
+        div.remove()
+    }
+    const onYes = () => {
+        onClose()
+        yes && yes();
+    }
+    const onNo = () => {
+        onClose()
+        no && no();
+    }
+    const div = document.createElement('div')
+    document.body.appendChild(div)
+    const component = <Dialog visiable={true} onClose={onClose}
+        buttons={[
+            <Button onClick={onNo}>Cancel</Button>,
+            <Button type="primary" onClick={onYes}>OK</Button>,
+        ]}>{content}</Dialog>;
+
+    ReactDOM.render(
+        component,
+        div
+    )
+}
+
+const modal = (content: string, yes?: () => void, no?: () => void) => {
+    const onClose = () => {
+        ReactDOM.render(
+            React.cloneElement(component, { visiable: false }), div
+        )
+        ReactDOM.unmountComponentAtNode(div)
+        div.remove()
+    }
+    const div = document.createElement('div')
+    document.body.appendChild(div)
+    const component = <Dialog visiable={true} onClose={onClose}>{content}</Dialog>;
+
+    ReactDOM.render(
+        component,
+        div
+    )
+}
+
+
 Dialog.defaultProps = {
     onCloseClickWrapper: true
 }
 
 export default Dialog;
-export { alert }
+export { alert, confirm, modal }
