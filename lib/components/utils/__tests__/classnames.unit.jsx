@@ -32,5 +32,6 @@ describe('scopeClass', () => {
         expect(sc({y: true,z: true})).toEqual('f-layout-y f-layout-z');
         expect(sc({y: true,z: false})).toEqual('f-layout-y');
         expect(sc({y: false,z: false})).toEqual('');
+        expect(sc({y: true,z: true},{extra: 'red'})).toEqual('f-layout-y f-layout-z red');
     })
 });
