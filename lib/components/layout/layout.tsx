@@ -10,14 +10,10 @@ interface LayoutProps extends React.HTMLAttributes<HTMLElement> {
 const sc = scopeClass('f-layout');
 const Layout: React.FunctionComponent<LayoutProps> = (props) => {
     const {className, ...rest} = props;
-    let hasAside = false;
-    if((props.children as Array<ReactElement>).length){
-        (props.children as Array<ReactElement>).map(node => {
-            if(node.type === Aside){
-                hasAside = true
-            }
-        })
-    }
+    const children = props.children as Array<ReactElement>;
+    // 也可以用some
+    const hasAside = children.length &&
+        children.reduce((result,node) => result || node.type === Aside, false);
     return (
         <div className={sc('', {extra: [className, hasAside && 'hasAside'].join(' ')})} {...rest}>
             {props.children}
