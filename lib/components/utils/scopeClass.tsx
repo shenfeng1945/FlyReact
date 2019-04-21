@@ -7,22 +7,15 @@ interface nameInput {
     [K: string]: boolean
 }
 
-const scopeClass = (prefix: string) => {
-    return (name: string | nameInput, options?: scopeClassOptions) => {
-        const namesObject = typeof name === 'string' || name === undefined ?
-            {[name]: name} :
-            name;
-        const scoped = Object.entries(namesObject)
+const scopeClass = (prefix: string) =>
+    (name: string | nameInput, options?: scopeClassOptions) =>
+        Object.entries(name instanceof Object ? name : {[name]: name})
             .filter(item => item[1] || item[1] === '')
             .map(item => item[0])
             .map(item => [prefix, item]
                 .filter(Boolean)
                 .join('-'))
+            .concat(options && options.extra || [])
             .join(' ');
-        if (options && options.extra) {
-            return [scoped, options.extra].filter(Boolean).join(' ')
-        }
-        return scoped;
-    }
-};
+
 export default scopeClass;
