@@ -7,18 +7,18 @@
     flex-grow: 1;
   }
 
-  &-hasAside {
-    flex-direction: row;
-
-    .f-layout {
-      flex-direction: column !important;
-    }
-  }
-
   & & {
     flex-grow: 1;
     border: 1px solid black;
     flex-direction: row;
+  }
+
+  &-hasAside {
+    flex-direction: row;
+
+    .f-layout {
+      flex-direction: column;
+    }
   }
 
   > &-aside {

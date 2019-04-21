@@ -30,7 +30,7 @@ const Dialog: React.FunctionComponent<DialogProps> = (props) => {
                 props.enableWrapper &&
                 <div className={sc('wrapper')} onClick={handlerCloseWrapper}/>
             }
-            <div className={sc()}>
+            <div className={sc('')}>
                 <header className={sc('header')}>
                     <h4 className={sc('heading')}>选项</h4>
                     <div className="close" onClick={handlerClose}>
