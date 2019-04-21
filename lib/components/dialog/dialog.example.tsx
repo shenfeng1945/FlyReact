@@ -4,12 +4,17 @@ import Button from '../button/button';
 
 export default function () {
     const [x, setX] = useState(false);
+    const openModel = () => {
+        const close = modal(<h1>你好
+            <Button onClick={() => close()}>Close</Button>
+        </h1>)
+    };
     return (
         <div>
             <button onClick={() => setX(!x)}>click</button>
             <button onClick={() => alert('hello')}>alert</button>
             <button onClick={() => confirm('hello', () => console.log('confirm 确认了'), () => console.log('confirm 取消了'))}>confirm</button>
-            <button onClick={() => modal('hello')}>modal</button>
+            <button onClick={openModel}>modal</button>
             <Dialog visiable={x}
                 onClose={() => setX(false)}
                 buttons={[
