@@ -1,9 +1,12 @@
 import React from 'react';
+import scopeClass from "../utils/scopeClass";
 
-const Footer: React.FunctionComponent = () => {
+const sc = scopeClass('f-layout');
+
+const Footer: React.FunctionComponent = (props) => {
     return (
-        <div>Footer</div>
+        <div className={sc('footer')}>{props.children}</div>
     )
-}
+};
 
 export default Footer;

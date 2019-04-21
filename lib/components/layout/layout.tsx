@@ -1,17 +1,28 @@
-import React from 'react';
+import React, {ReactElement} from 'react';
+import scopeClass from "../utils/scopeClass";
+import './layout.scss'
+import Aside from "./aside";
 
-const DefaultPrefix = 'f-layout';
-const scopeClassName = (name = '') => {
-    return [DefaultPrefix, name].filter(Boolean).join('-')
+interface LayoutProps extends React.HTMLAttributes<HTMLElement> {
+    children: ReactElement | Array<ReactElement>
 }
-const sc = scopeClassName;
 
-const Layout: React.FunctionComponent = () => {
+const sc = scopeClass('f-layout');
+const Layout: React.FunctionComponent<LayoutProps> = (props) => {
+    const {className, ...rest} = props;
+    let hasAside = false;
+    if((props.children as Array<ReactElement>).length){
+        (props.children as Array<ReactElement>).map(node => {
+            if(node.type === Aside){
+                hasAside = true
+            }
+        })
+    }
     return (
-      <div className={sc('')}>
-        
-      </div>
+        <div className={sc('', {extra: [className, hasAside && 'hasAside'].join(' ')})} {...rest}>
+            {props.children}
+        </div>
     )
-}
+};
 
 export default Layout;

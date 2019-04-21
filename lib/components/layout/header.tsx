@@ -1,9 +1,12 @@
 import React from 'react';
+import scopeClass from "../utils/scopeClass";
 
-const Header: React.FunctionComponent = () => {
+const sc = scopeClass('f-layout');
+
+const Header: React.FunctionComponent = (props) => {
     return (
-        <div>Header</div>
+        <div className={sc('header')}>{props.children}</div>
     )
-}
+};
 
 export default Header;

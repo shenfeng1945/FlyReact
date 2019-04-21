@@ -1,0 +1,27 @@
+.f-layout {
+  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+
+  &-content {
+    flex-grow: 1;
+  }
+
+  &.hasAside {
+    flex-direction: row;
+
+    .f-layout {
+      flex-direction: column;
+    }
+  }
+
+  & & {
+    flex-grow: 1;
+    border: 1px solid black;
+    flex-direction: row;
+  }
+
+  > &-aside {
+    color: red;
+  }
+}

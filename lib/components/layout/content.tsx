@@ -1,9 +1,12 @@
 import React from 'react';
+import scopeClass from "../utils/scopeClass";
 
-const Content: React.FunctionComponent = () => {
+const sc = scopeClass('f-layout');
+
+const Content: React.FunctionComponent = (props) => {
     return (
-        <div>Content</div>
+        <div className={sc('content')}>{props.children}</div>
     )
-}
+};
 
 export default Content;
