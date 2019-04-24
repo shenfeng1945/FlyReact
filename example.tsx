@@ -3,7 +3,7 @@ import DialogExample from './lib/components/dialog/dialog.example'
 import ButtonExample from './lib/components/button/button.example'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { HashRouter as Router, Route, Link } from 'react-router-dom'
+import { HashRouter as Router, Route, NavLink } from 'react-router-dom'
 import LayoutExample from './lib/components/layout/layout.example';
 
 ReactDOM.render(
@@ -19,16 +19,16 @@ ReactDOM.render(
                     <h2>组件</h2>
                     <ul>
                         <li>
-                            <Link to="/icon">Icon</Link>
+                            <NavLink to="/icon">Icon</NavLink>
                         </li>
                         <li>
-                            <Link to="/button">Button</Link>
+                            <NavLink to="/button">Button</NavLink>
                         </li>
                         <li>
-                            <Link to="/dialog">Dialog</Link>
+                            <NavLink to="/dialog">Dialog</NavLink>
                         </li>
                         <li>
-                            <Link to="/layout">Layout</Link>
+                            <NavLink to="/layout">Layout</NavLink>
                         </li>
                     </ul>
                 </aside>
