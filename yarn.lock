@@ -5254,6 +5254,10 @@ pretty-format@^24.7.0:
     ansi-styles "^3.2.0"
     react-is "^16.8.4"
 
+prism-react-renderer@^0.1.6:
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/prism-react-renderer/-/prism-react-renderer-0.1.6.tgz#c9216baa234fab1c234209fcdaf0cd23a01c50a9"
+
 private@^0.1.6:
   version "0.1.8"
   resolved "https://registry.yarnpkg.com/private/-/private-0.1.8.tgz#2381edb3689f7a53d653190060fcf822d2f368ff"
@@ -5420,6 +5424,13 @@ raw-body@2.3.3:
     http-errors "1.6.3"
     iconv-lite "0.4.23"
     unpipe "1.0.0"
+
+raw-loader@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/raw-loader/-/raw-loader-2.0.0.tgz#e2813d9e1e3f80d1bbade5ad082e809679e20c26"
+  dependencies:
+    loader-utils "^1.1.0"
+    schema-utils "^1.0.0"
 
 rc@^1.2.7:
   version "1.2.8"
