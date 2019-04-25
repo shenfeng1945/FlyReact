@@ -1,11 +1,14 @@
 import React from 'react';
 import scopeClass from "../utils/scopeClass";
 
+interface ContentProps extends React.HTMLAttributes<HTMLElement> {
+}
 const sc = scopeClass('f-layout');
 
-const Content: React.FunctionComponent = (props) => {
+const Content: React.FunctionComponent<ContentProps> = (props) => {
+    const {className, ...rest} = props;
     return (
-        <div className={sc('content')}>{props.children}</div>
+        <div className={sc('content', {extra: className})} {...rest}>{props.children}</div>
     )
 };
 
