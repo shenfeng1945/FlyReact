@@ -1,5 +1,6 @@
 import DialogExample from './lib/components/dialog/dialog.example'
 import ButtonExample from './lib/components/button/button.example'
+import FormExample from './lib/components/form/form.example';
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { HashRouter as Router, Route, NavLink } from 'react-router-dom'
@@ -37,6 +38,9 @@ ReactDOM.render(
                         <li>
                             <NavLink to="/layout">Layout</NavLink>
                         </li>
+                        <li>
+                            <NavLink to="/form">Form</NavLink>
+                        </li>
                     </ul>
                 </Aside>
                 <Content className="site-content">
@@ -45,6 +49,7 @@ ReactDOM.render(
                     <Route path="/button" component={ButtonExample}></Route>
                     <Route path="/dialog" component={DialogExample}></Route>
                     <Route path="/layout" component={LayoutExample}></Route>
+                    <Route path="/form" component={FormExample}></Route>
                 </Content>
             </Layout>
             <Footer className="site-footer">
