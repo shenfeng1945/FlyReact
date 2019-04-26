@@ -4,16 +4,20 @@ interface Props {
     fields: Array<{ name: string, label: string, input: { type: string } }>;
     buttons: ReactFragment;
     onSubmit: React.FormEventHandler;
-    onChange: React.FormEventHandler;
+    onChange: any;
 }
 
 const Form: React.FunctionComponent<Props> = (props) => {
     const { fields, value: formData } = props;
     const onInputChange = (name: string, e: any) => {
-        console.log(name, e.target.value)
-    }
+        props.onChange({...formData,[name]: e.target.value})
+    };
+    const onSubmit = (e:any) => {
+        e.preventDefault();
+        props.onSubmit(e);
+    };
     return (
-        <form>
+        <form onSubmit={onSubmit}>
             {
                 fields.map(f => {
                     return (
@@ -29,5 +33,5 @@ const Form: React.FunctionComponent<Props> = (props) => {
             </div>
         </form>
     )
-}
+};
 export default Form;
