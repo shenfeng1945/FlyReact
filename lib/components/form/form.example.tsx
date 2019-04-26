@@ -12,10 +12,10 @@ const FormExample: React.FunctionComponent = () => {
     ]);
     const onSubmit = () => {
        console.log(formData)
-    }
-    const onChange = () => {
-
-    }
+    };
+    const onChange = (e:any) => {
+        setFormData(e);
+    };
     return (
       <Form value={formData} fields={fields}
         buttons={
@@ -26,7 +26,7 @@ const FormExample: React.FunctionComponent = () => {
         }
         onSubmit={onSubmit}
         onChange={onChange}
-      ></Form>
+      />
     )
-}
+};
 export default FormExample;
