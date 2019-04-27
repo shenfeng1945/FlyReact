@@ -1,18 +1,22 @@
 import React, { ReactFragment } from 'react'
+
+export interface FormValue {
+    [K: string]: any
+}
 interface Props {
-    value: { [K: string]: any };
+    value: FormValue;
     fields: Array<{ name: string, label: string, input: { type: string } }>;
     buttons: ReactFragment;
-    onSubmit: React.FormEventHandler;
-    onChange: any;
+    onSubmit: React.FormEventHandler<HTMLFormElement>;
+    onChange: (value: FormValue) => void;
 }
 
 const Form: React.FunctionComponent<Props> = (props) => {
     const { fields, value: formData } = props;
-    const onInputChange = (name: string, e: any) => {
+    const onInputChange = (name: string, e: React.ChangeEvent<HTMLInputElement>) => {
         props.onChange({...formData,[name]: e.target.value})
     };
-    const onSubmit = (e:any) => {
+    const onSubmit: React.FormEventHandler<HTMLFormElement> = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         props.onSubmit(e);
     };
