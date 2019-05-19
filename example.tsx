@@ -8,7 +8,9 @@ import LayoutExample from './lib/components/layout/layout.example';
 import { Layout, Header, Aside, Content, Footer } from './lib/components/layout/layout';
 import './example.scss';
 import IconDemo from './lib/components/icon/icon.demo';
-const x = require('./logo.png')
+import ScrollExample from "./lib/components/scroll/scroll.example";
+
+const x = require('./logo.png');
 
 
 ReactDOM.render(
@@ -41,15 +43,19 @@ ReactDOM.render(
                         <li>
                             <NavLink to="/form">Form</NavLink>
                         </li>
+                        <li>
+                            <NavLink to="/scroll">Scroll</NavLink>
+                        </li>
                     </ul>
                 </Aside>
                 <Content className="site-content">
-                    <Route path="/" exact render={() => <div>Hello FlyReact</div>}></Route>
-                    <Route path="/icon" component={IconDemo}></Route>
-                    <Route path="/button" component={ButtonExample}></Route>
-                    <Route path="/dialog" component={DialogExample}></Route>
-                    <Route path="/layout" component={LayoutExample}></Route>
-                    <Route path="/form" component={FormExample}></Route>
+                    <Route path="/" exact render={() => <div>Hello FlyReact</div>}/>
+                    <Route path="/icon" component={IconDemo}/>
+                    <Route path="/button" component={ButtonExample}/>
+                    <Route path="/dialog" component={DialogExample}/>
+                    <Route path="/layout" component={LayoutExample}/>
+                    <Route path="/form" component={FormExample}/>
+                    <Route path="/scroll" component={ScrollExample}/>
                 </Content>
             </Layout>
             <Footer className="site-footer">
@@ -58,4 +64,4 @@ ReactDOM.render(
         </Layout>
     </Router>,
     document.querySelector('#root')
-)
+);
