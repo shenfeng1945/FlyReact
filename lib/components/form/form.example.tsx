@@ -13,9 +13,8 @@ const FormExample: React.FunctionComponent = () => {
     ]);
     const rules = [
         {key: 'username', required: true},
-        {key: 'username', minLength: 8},
+        {key: 'username', minLength: 8, maxLength: 16},
         {key: 'username', pattern: /^[a-zA-Z0-9]+$/},
-        {key: 'username', maxLength: 16},
         {key: 'password', required: true},
     ];
     const onSubmit = () => {

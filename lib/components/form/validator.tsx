@@ -1,4 +1,4 @@
-import {FormValue} from "./form";
+import { FormValue } from "./form";
 
 interface FormRule {
     key: string;
@@ -17,6 +17,10 @@ interface FormErrors {
 const isEmpty = (value: any) => {
     return value === '' || value === undefined || value === null;
 };
+
+export function noError(errors: any) {
+    return Object.keys(errors).length === 0;
+}
 
 const Validator = (formValue: FormValue, rules: FormRules): FormErrors => {
     let errors: any = {};
@@ -37,8 +41,8 @@ const Validator = (formValue: FormValue, rules: FormRules): FormErrors => {
         if (rule.maxLength && !isEmpty(value) && value.length > rule.maxLength) {
             addError(rule.key, '太长')
         }
-        if(rule.pattern && !(rule.pattern.test(value))){
-            addError(rule.key,'格式不合法')
+        if (rule.pattern && !(rule.pattern.test(value))) {
+            addError(rule.key, '格式不合法')
         }
     });
     return errors;
