@@ -1,5 +1,25 @@
-.f-form{
-    &-row{
-        margin-top: 16px;
+@import '../index.scss';
+.f-form {
+    &-table {
+        border-collapse: collapse;
     }
+
+    &-row {
+
+        margin-top: 16px;
+
+        td {
+            vertical-align: top;
+        }
+
+    }
+    
+    &-label{
+       line-height: 32px;
+    }
+    
+    &-error{
+        color: $button-danger-bg;
+    }
+
 }

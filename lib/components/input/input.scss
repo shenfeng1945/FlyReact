@@ -1,9 +1,13 @@
+@import '../index.scss';
 .f-input{
-    border: 1px solid red;
+    border: 1px solid $border-color;
     line-height: 22px;
     padding: 4px 8px;
     border-radius: 4px;
     &:focus{
         outline: none;
+    }
+    &.danger{
+       border: 1px solid red;
     }
 }

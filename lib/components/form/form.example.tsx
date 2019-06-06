@@ -2,6 +2,7 @@ import React, { useState, Fragment } from 'react'
 import Form, {FormValue} from './form';
 import Validator from "./validator";
 
+
 const FormExample: React.FunctionComponent = () => {
     const [formData,setFormData] = useState<FormValue>({
         username: '',
@@ -17,11 +18,10 @@ const FormExample: React.FunctionComponent = () => {
         {key: 'username', pattern: /^[a-zA-Z0-9]+$/},
         {key: 'password', required: true},
     ];
+    const [errors,setError] = useState({});
     const onSubmit = () => {
         const errors = Validator(formData,rules);
-        console.log(formData);
-        console.log('errors');
-        console.log(errors);
+        setError(errors);
     };
     const onChange = (e: any) => {
         setFormData(e);
@@ -36,6 +36,7 @@ const FormExample: React.FunctionComponent = () => {
         }
         onSubmit={onSubmit}
         onChange={onChange}
+        errors={errors}
       />
     )
 };
