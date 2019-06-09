@@ -2,10 +2,21 @@ import React, { useState, Fragment } from 'react'
 import Form, {FormValue} from './form';
 import Validator from "./validator";
 
+const checkUsername = (username: string, success: () => void, fail: () => void) => {
+    const existName = ['allen','hello-world'];
+    setTimeout(() => {
+        if(existName.indexOf(username) >= 0){
+            success()
+        }else{
+            console.log('hello');
+            fail()
+        }
+    }, 2000)
+};
 
 const FormExample: React.FunctionComponent = () => {
     const [formData,setFormData] = useState<FormValue>({
-        username: '',
+        username: 'allen',
         password: ''
     });
     const [fields] = useState([
@@ -16,6 +27,14 @@ const FormExample: React.FunctionComponent = () => {
         {key: 'username', required: true},
         {key: 'username', minLength: 8, maxLength: 16},
         {key: 'username', pattern: /^[a-zA-Z0-9]+$/},
+        {key: 'username', validator: {
+            name: 'unique',
+            validate: (username: string) => {
+                return new Promise((resolve,reject) => {
+                    checkUsername(username, resolve, reject);
+                })
+            }
+            }},
         {key: 'password', required: true},
     ];
     const [errors,setError] = useState({});
