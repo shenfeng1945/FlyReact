@@ -10,19 +10,19 @@ const checkUsername = (username: string, success: () => void, fail: () => void) 
         }else{
             success()
         }
-    }, 2000)
+    }, 1000)
 };
 
 const FormExample: React.FunctionComponent = () => {
     const [formData,setFormData] = useState<FormValue>({
-        username: 'hellworld',
+        username: 'helloworld',
         password: ''
     });
     const [fields] = useState([
         {name: 'username', label: '用户名', input: {type: 'text'}},
         {name: 'password', label: '密码', input: {type: 'password'}},
     ]);
-    const validate = (username: string) => new Promise((resolve,reject) => checkUsername(username, resolve, reject));
+    const validate = (username: string) => new Promise((resolve,reject) => checkUsername(username, resolve, () => reject(`${username} is exist`)));
     const rules = [
         {key: 'username', required: true},
         {key: 'username', minLength: 8, maxLength: 16},

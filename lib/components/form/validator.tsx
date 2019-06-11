@@ -1,4 +1,5 @@
 import { FormValue } from "./form";
+import {flatArray} from '../utils/transformObject';
 
 interface FormRule {
     key: string;
@@ -19,24 +20,6 @@ const isEmpty = (value: any) => {
     return value === '' || value === undefined || value === null;
 };
 
-const flatArray = (array: Array<any>) => {
-    let result: Array<any> = [];
-    array.forEach(a => {
-        if(a instanceof Array){
-            result.push(...a)
-        }else{
-            result.push(a)
-        }
-    });
-    return result;
-};
-
-// const getAllErrorPromise = (errors: FormErrors): Array<Promise<any>> => {
-//     return flatArray(Object.values(errors)).
-//         filter(item => item.promise).
-//         map(item => item.promise);
-// };
-
 export function noError(errors: any) {
     return Object.keys(errors).length === 0;
 }
@@ -56,32 +39,30 @@ const Validator = (formValue: FormValue, rules: FormRules): Promise<FormErrors> 
            addError(rule.key, promise)
         }
         if (rule.required && isEmpty(value)) {
-            addError(rule.key, '必填')
+            addError(rule.key, 'required')
         }
         if (rule.minLength && !isEmpty(value) && value.length < rule.minLength) {
-            addError(rule.key, '太短')
+            addError(rule.key, 'too short')
         }
         if (rule.maxLength && !isEmpty(value) && value.length > rule.maxLength) {
-            addError(rule.key, '太长')
+            addError(rule.key, 'too long')
         }
         if (rule.pattern && !(rule.pattern.test(value))) {
-            addError(rule.key, '格式不合法')
+            addError(rule.key, 'pattern invalid')
         }
     });
-    const x = (res: any) => {
-      const result:any = {};
-      res.forEach((item:any) => {
-          if(!result[item[0]]){
-              result[item[0]] = [];
-          }
-          item[1] && result[item[0]].push(item[1]);
-          if(result[item[0]].length === 0){
-              delete result[item[0]]
+    const getErrors = (res: Array<[string, string | undefined]>) => {
+      const result:{[K: string]: Array<string>} = {};
+      res.forEach( ([key, error])=> {
+          result[key] = result[key] || [];
+          error && result[key].push(error);
+          if(result[key].length === 0){
+              delete result[key]
           }
       })
       return result;
     }
-    const transformFlatArray = (errors: FormErrors) => {
+    const transformFlatArray = (errors: FormErrors): Array<Array<any>> => {
        const keys = Object.keys(errors);
        return keys.map(key => {
           return errors[key].map(item => {
@@ -89,17 +70,17 @@ const Validator = (formValue: FormValue, rules: FormRules): Promise<FormErrors> 
           })
        })
     };
-    const c = flatArray(transformFlatArray(errors)).map(array => {
-        const  a = array[1] instanceof Promise ? array[1] : Promise.resolve(array[1])
-        return a.then(
+    const promiseList = flatArray(transformFlatArray(errors)).map(([key, promiseOrString]) => {
+        const generatePromise = promiseOrString instanceof Promise ? promiseOrString : Promise.resolve(promiseOrString);
+        return generatePromise.then(
             () => {
-                return [[array[0]], array[1] instanceof Promise ? undefined: array[1]]
+                return [key, promiseOrString instanceof Promise ? undefined: promiseOrString]
             },
-            () => {
-                return [[array[0]], 'error']
+            (reason: string) => {
+                return [key, reason]
             }
         )
     })
-    return Promise.all(c).then(x,x)  
+    return Promise.all(promiseList).then(getErrors,getErrors) 
 };
 export default Validator;
